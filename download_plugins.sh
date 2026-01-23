@@ -23,7 +23,8 @@ download_plugin() {
 }
 
 # Скачиваем плагины
-download_plugin "d3156/PingNode" "libPingNodePlugin_1.0.2.so"
-download_plugin "d3156/PrometheusExporterPlugin" "libPrometheusExporterPlugin_1.0.1.so"
+download_plugin "d3156/PingNode" "libPingNodePlugin.so"
+download_plugin "d3156/PrometheusExporterPlugin" "libPrometheusExporterPlugin.so"
+download_plugin "d3156/PrometheusExporterPlugin" "libTelegramNotifierPlugin.so"
 
 echo "All plugins downloaded successfully!"
