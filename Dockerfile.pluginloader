@@ -18,12 +18,13 @@ RUN LATEST_VERSION=$(curl -s https://api.github.com/repos/d3156/PluginCore/relea
 
 RUN mkdir -p configs Plugins
 
-RUN PINGNODE_VERSION=$(curl -s https://api.github.com/repos/d3156/PingNode/releases/latest | jq -r .tag_name) \
-    && echo "Latest PingNode version: $PINGNODE_VERSION" \
-    && wget -O Plugins/PingNodePlugin_${PINGNODE_VERSION}.so "https://github.com/d3156/PingNode/releases/download/${PINGNODE_VERSION}/PingNodePlugin_${PINGNODE_VERSION}.so" \
-    && PROMEXPORTER_VERSION=$(curl -s https://api.github.com/repos/d3156/PrometheusExporterPlugin/releases/latest | jq -r .tag_name) \
-    && echo "Latest PrometheusExporterPlugin version: $PROMEXPORTER_VERSION" \
-    && wget -O Plugins/PrometheusExporterPlugin_${PROMEXPORTER_VERSION}.so "https://github.com/d3156/PrometheusExporterPlugin/releases/download/${PROMEXPORTER_VERSION}/PrometheusExporterPlugin_${PROMEXPORTER_VERSION}.so"
+RUN set -eux; \
+    PINGNODE_VERSION=$(curl -s https://api.github.com/repos/d3156/PingNode/releases/latest | jq -r .tag_name); \
+    echo "Latest PingNode version: $PINGNODE_VERSION"; \
+    wget -O Plugins/libPingNodePlugin_${PINGNODE_VERSION}.so "https://github.com/d3156/PingNode/releases/download/${PINGNODE_VERSION}/libPingNodePlugin_${PINGNODE_VERSION}.so"; \
+    PROMEXPORTER_VERSION=$(curl -s https://api.github.com/repos/d3156/PrometheusExporterPlugin/releases/latest | jq -r .tag_name); \
+    echo "Latest PrometheusExporterPlugin version: $PROMEXPORTER_VERSION"; \
+    wget -O Plugins/libPrometheusExporterPlugin_${PROMEXPORTER_VERSION}.so "https://github.com/d3156/PrometheusExporterPlugin/releases/download/${PROMEXPORTER_VERSION}/libPrometheusExporterPlugin_${PROMEXPORTER_VERSION}.so"
 
 EXPOSE 8000
 
