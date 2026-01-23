@@ -1,0 +1,22 @@
+{
+    "ping_interval_sec": "3",
+    "timeout_ms": "1000",
+    "icmp_payload": "ffff",
+    "nodes": [
+        {
+            "name": "Local",
+            "url": "localhost",
+            "ip": ""
+        },
+        {
+            "name": "Google",
+            "url": "google.com",
+            "ip": ""
+        },
+        {
+            "name": "Yandex",
+            "url": "ya.ru",
+            "ip": ""
+        }
+    ]
+}
