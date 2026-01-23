@@ -17,4 +17,3 @@ RUN LATEST_VERSION=$(curl -s https://api.github.com/repos/d3156/PluginCore/relea
     && setcap cap_net_raw+ep PluginLoader
 
 EXPOSE 8000
-

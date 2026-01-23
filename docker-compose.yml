@@ -34,9 +34,8 @@ services:
       context: .
       dockerfile: Dockerfile.pluginloader
     cap_add:
-      - NET_RAW       # raw socket для ICMP
+      - NET_RAW
     container_name: pluginloader
-    network_mode: "host"  # чтобы пингать localhost
     volumes:
       - ./configs:/app/configs
       - ./Plugins:/app/Plugins
@@ -44,7 +43,7 @@ services:
     user: root
     command: ["./PluginLoader"] 
     healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8000/metrics", "||", "exit", "1"]
+        test: ["CMD", "curl", "-f", "http://pluginloader:8000/metrics", "||", "exit", "1"]
         interval: 30s
         timeout: 10s
         retries: 3
