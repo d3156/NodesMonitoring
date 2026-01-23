@@ -16,6 +16,32 @@ After starting:
     - Login: `admin`
     - Password: `admin`
 
+## Nginx Configuration for Grafana
+
+## 1. Update `docker-compose.yml`:
+Replace the URLs with your domain:
+```docker-compose
+environment:
+  GF_SERVER_ROOT_URL: http://localhost:13000/
+  GF_SERVER_HTTP_EXTERNAL_URL: http://localhost:13000/
+```
+## 2. Configure Nginx
+Add the following location block to your server section in `nginx.conf` to properly reverse-proxy Grafana under `/grafana/`:
+```nginx
+    location /grafana/ {
+        proxy_pass http://127.0.0.1:13000/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_redirect http://127.0.0.1:13000/ /grafana/;
+   }
+```
+Notes:
+`proxy_pass` points to your Grafana container’s internal port.
+`proxy_redirect` ensures Grafana correctly rewrites URLs when accessed through `/grafana/`.
+`X-Forwarded-*` headers preserve client information and protocol.
+
 ## 📊 Dashboards
 
 - **Ping Node** — displays node latency and availability metrics.
