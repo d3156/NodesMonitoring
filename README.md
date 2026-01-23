@@ -4,7 +4,7 @@
 
 ## 🚀 Quick Start
 ```
-git clone git@github.com:d3156/NodesMonitoring.git
+git clone https://github.com/d3156/NodesMonitoring.git
 cd NodesMonitoring
 # Optional: edit example configs in ./configs/*
 docker compose up -d --build
