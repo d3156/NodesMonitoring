@@ -6,6 +6,7 @@
 ```
 git clone https://github.com/d3156/NodesMonitoring.git
 cd NodesMonitoring
+sh download_plugins.sh
 # Optional: edit example configs in ./configs/*
 docker compose up -d --build
 ```
