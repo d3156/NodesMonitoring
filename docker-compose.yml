@@ -20,6 +20,7 @@ services:
       - "13000:3000"
     environment:
       GF_SERVER_ROOT_URL: http://localhost:13000/
+      GF_SERVER_HTTP_EXTERNAL_URL: http://localhost:13000/
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: admin
     volumes:
