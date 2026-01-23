@@ -16,15 +16,15 @@ download_plugin() {
     fi
 
     echo "Latest version: $version"
-    local url="https://github.com/$repo/releases/download/$version/$output_name"
-    wget -O "$PLUGINS_DIR/$output_name" "$url"
-    echo "$repo downloaded to $PLUGINS_DIR/$output_name"
+    local url="https://github.com/$repo/releases/download/$version/${output_name}_${version}.so"
+    wget -O "$PLUGINS_DIR/${output_name}.so" "$url"
+    echo "$repo downloaded to $PLUGINS_DIR/${output_name}.so"
     echo
 }
 
 # Скачиваем плагины
-download_plugin "d3156/PingNode" "libPingNodePlugin.so"
-download_plugin "d3156/PrometheusExporterPlugin" "libPrometheusExporterPlugin.so"
-download_plugin "d3156/PrometheusExporterPlugin" "libTelegramNotifierPlugin.so"
+download_plugin "d3156/PingNode" "libPingNodePlugin"
+download_plugin "d3156/PrometheusExporterPlugin" "libPrometheusExporterPlugin"
+download_plugin "d3156/TelegramNotifierPlugin" "libTelegramNotifierPlugin"
 
 echo "All plugins downloaded successfully!"
