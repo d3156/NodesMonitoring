@@ -6,26 +6,34 @@
 !define ORANGE #FFA500
 !define PURPLE #DDA0DD
 
+component "Prometheus" GREEN
+component "Grafana" ORANGE
+
 component PluginLoader{
 ' Компоненты внутри PluginLoader
 component "ModelStorage" BLUE
 component "MetricsModel" LIGHT_BLUE
 component "PingNodeModel" LIGHT_BLUE
-component "PingNodePlugin" PURPLE
 component "PrometheusExporterPlugin" PURPLE
+component "PingNodePlugin" PURPLE
+component "TelegramNotifierPlugin" PURPLE
 }
 
-component "Prometheus" GREEN
-component "Grafana" ORANGE
+component "TelegramApi" GREEN
 
+PrometheusExporterPlugin --> Prometheus : exports metrics
+Prometheus --> Grafana : provides metrics
 ' Взаимосвязи
-PingNodeModel --> ModelStorage
 PrometheusExporterPlugin <-- MetricsModel : Upload metrics
+PingNodeModel --> ModelStorage
 PingNodePlugin --> PingNodeModel : Export interface for plugins
+PingNodePlugin --> MetricsModel : metrics
+
+MetricsModel --> TelegramNotifierPlugin  : Inspect metrics
+
+TelegramNotifierPlugin --> TelegramApi
 
 MetricsModel --> ModelStorage
-PingNodePlugin --> MetricsModel : metrics
-PluginLoader --> Prometheus : exports metrics
-Prometheus --> Grafana : provides metrics
+
 
 @enduml
