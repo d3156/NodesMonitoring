@@ -33,7 +33,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "max": 1000,
+          "max": 100,
           "thresholds": {
             "mode": "percentage",
             "steps": [
@@ -100,7 +100,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "max": 1000,
+          "max": 100,
           "thresholds": {
             "mode": "percentage",
             "steps": [
