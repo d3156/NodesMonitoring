@@ -23,6 +23,7 @@ services:
       GF_SERVER_HTTP_EXTERNAL_URL: http://localhost:13000/
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: admin
+
     volumes:
       - grafana_data:/var/lib/grafana
       - ./provisioning:/etc/grafana/provisioning
@@ -37,9 +38,13 @@ services:
     cap_add:
       - NET_RAW
     container_name: pluginloader
+    environment:
+      OUT: FILE
+      PER_SOURCE_FILES: true
     volumes:
       - ./configs:/app/configs
       - ./Plugins:/app/Plugins
+      - ./logs:/app/logs
     restart: unless-stopped
     user: root
     command: ["./PluginLoader"] 

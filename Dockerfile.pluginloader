@@ -4,8 +4,7 @@ RUN apt-get update && apt-get install -y \
     wget curl jq libboost-system-dev libboost-filesystem-dev \
     libboost-program-options-dev libboost-thread-dev libboost-chrono-dev \
     libboost-date-time-dev libboost-atomic-dev libboost-json-dev \
-    openssl ca-certificates libcap2-bin \
-    && rm -rf /var/lib/apt/lists/*
+    openssl ca-certificates libcap2-bin
 
 WORKDIR /app
 
@@ -13,7 +12,10 @@ RUN LATEST_VERSION=$(curl -s https://api.github.com/repos/d3156/PluginCore/relea
     && if [ -z "$LATEST_VERSION" ]; then echo "Failed to get latest version" && exit 1; fi \
     && echo "Latest version: $LATEST_VERSION" \
     && wget -O PluginLoader "https://github.com/d3156/PluginCore/releases/download/${LATEST_VERSION}/PluginLoader_${LATEST_VERSION}" \
+    && wget -O d3156-plugincore_1.1.0_amd64.deb "https://github.com/d3156/PluginCore/releases/download/${LATEST_VERSION}/d3156-plugincore_${LATEST_VERSION}_amd64.deb" \
+    && dpkg -i d3156-plugincore_${LATEST_VERSION}_amd64.deb \
     && chmod +x PluginLoader \
-    && setcap cap_net_raw+ep PluginLoader
+    && setcap cap_net_raw+ep PluginLoader \
+    && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8000
